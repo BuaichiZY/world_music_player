@@ -1,0 +1,92 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.147'
+}
+
+group = 'dev.worldmusic'
+version = mod_version
+base.archivesName = 'world_music-26.3'
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+}
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+neoForge {
+    version = neo_version
+    runs {
+        client {
+            client()
+            gameDirectory = file('run/client')
+        }
+        clientSmoke {
+            client()
+            sourceSet = sourceSets.smoke
+            gameDirectory = file('run/smoke')
+            programArguments.addAll '--width', '854', '--height', '480'
+        }
+        clientGameplay {
+            client()
+            sourceSet = sourceSets.smoke
+            gameDirectory = file('run/gameplay')
+            systemProperty 'world_music.gameplayChecks', 'true'
+            systemProperty 'world_music.packChecks', project.findProperty('verifyMusicPack') ?: 'false'
+            programArguments.addAll '--width', '854', '--height', '480'
+        }
+    }
+    mods {
+        world_music { sourceSet sourceSets.main }
+        world_music_smoke { sourceSet sourceSets.smoke }
+    }
+    runs.client.loadedMods = [mods.world_music]
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+tasks.named('processResources') {
+    inputs.property 'mod_version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand mod_version: project.version }
+}
+tasks.named('downloadAssets') {
+    javaExecutable = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(25)
+    }.map { it.executablePath.asFile.absolutePath }
+}
+sourceSets {
+    verification {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+tasks.register('verifyMusicLogic', JavaExec) {
+    dependsOn verificationClasses
+    classpath = sourceSets.verification.runtimeClasspath
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+    mainClass = 'dev.worldmusic.MusicLogicTest'
+}
+tasks.named('check') { dependsOn 'verifyMusicLogic' }
+tasks.named('runClientSmoke') {
+    doFirst {
+        file('run/smoke').mkdirs()
+        file('run/smoke/smoke-result.txt').text = 'RUNNING'
+    }
+    doLast {
+        def result = file('run/smoke/smoke-result.txt').text
+        if (!result.startsWith('PASS:')) throw new GradleException('Client smoke checks failed: ' + result)
+    }
+}
+tasks.named('runClientGameplay') {
+    doFirst {
+        file('run/gameplay').mkdirs()
+        file('run/gameplay/gameplay-result.txt').text = 'RUNNING'
+    }
+    doLast {
+        def result = file('run/gameplay/gameplay-result.txt').text
+        if (!result.startsWith('PASS:')) throw new GradleException('Gameplay checks failed: ' + result)
+    }
+}

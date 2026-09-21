@@ -1,0 +1,23 @@
+# Generated build and game files (all versions)
+.gradle/
+build/
+run/
+output/
+.idea/
+*.iml
+*.log
+# User-supplied audio and generated archives
+*.ogg
+*.mp3
+*.wav
+*.flac
+*.zip
+*.jar
+# Local configuration and secrets
+.env
+.env.*
+*.pem
+*.key
+local.properties
+.DS_Store
+Thumbs.db

@@ -1,0 +1,21 @@
+license="MIT"
+
+[[mods]]
+modId="world_music"
+version="${mod_version}"
+displayName="World Music"
+description='''Customize world music with four time-of-day playlists, up to ten tracks each. Client only.'''
+
+[[dependencies.world_music]]
+modId="neoforge"
+type="required"
+versionRange="[26.1.2.94,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.world_music]]
+modId="minecraft"
+type="required"
+versionRange="[26.1.2]"
+ordering="NONE"
+side="CLIENT"

@@ -1,0 +1,6 @@
+license="MIT"
+[[mods]]
+modId="world_music_smoke"
+version="1.0.0"
+displayName="World Music Development Smoke Checks"
+description="Development-only client checks. Not included in the released mod."

@@ -1,0 +1,17 @@
+{
+  "world_music.config.enabled": "Enable scheduled world music",
+  "world_music.config.overworldOnly": "Overworld only",
+  "world_music.config.emptyUsesVanilla": "Use vanilla for empty playlists",
+  "world_music.config.morning": "Morning (06:00–12:00)",
+  "world_music.config.noon": "Noon (12:00–18:00)",
+  "world_music.config.evening": "Evening (18:00–00:00)",
+  "world_music.config.midnight": "Midnight (00:00–06:00)",
+  "world_music.configuration.title": "World Music Settings",
+  "world_music.message.reloaded": "Playlists will be checked again. Press F3+T after changing resource-pack audio.",
+  "world_music.message.status": "World Music | Period: %s | Playing: %s | Available tracks: %s",
+  "world_music.state.inactive": "Inactive",
+  "world_music.state.waiting": "Waiting / silent",
+  "world_music.state.vanilla": "Vanilla music",
+  "world_music.state.finished": "Finished; waiting for next period",
+  "world_music.message.skipped": "Skipped this period. Music resumes next period."
+}
