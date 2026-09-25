@@ -1,0 +1,17 @@
+{
+  "world_music.config.enabled": "启用分时段世界音乐",
+  "world_music.config.overworldOnly": "仅在主世界播放",
+  "world_music.config.emptyUsesVanilla": "空歌单恢复原版音乐",
+  "world_music.config.morning": "早晨（06:00—12:00）",
+  "world_music.config.noon": "中午（12:00—18:00）",
+  "world_music.config.evening": "晚上（18:00—00:00）",
+  "world_music.config.midnight": "午夜（00:00—06:00）",
+  "world_music.configuration.title": "世界音乐设置",
+  "world_music.message.reloaded": "已重新检查歌单；修改资源包后请按 F3+T 重新加载音频。",
+  "world_music.message.status": "世界音乐 | 时段：%s | 播放：%s | 可用曲目：%s",
+  "world_music.state.inactive": "未启用",
+  "world_music.state.waiting": "等待播放 / 静音",
+  "world_music.state.vanilla": "原版音乐",
+  "world_music.state.finished": "本时段已播放，等待下一时段",
+  "world_music.message.skipped": "已跳过本时段音乐，下一时段再播放。"
+}

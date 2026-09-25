@@ -58,12 +58,13 @@ foreach ($period in $periods) {
     }
     $config.Add($period + ' = [' + ($ids -join ', ') + ']')
 }
-$metadata = @{ pack = @{ description = 'World Music - custom time-of-day playlists'; min_format = @(97, 1); max_format = @(97, 1) } }
+# Minecraft 26.1.2 uses resource format 84. Declare newer formats compatible as requested.
+$metadata = @{ pack = @{ description = 'World Music - custom time-of-day playlists'; min_format = 84; max_format = 2147483647 } }
 [IO.File]::WriteAllText((Join-Path $stage 'pack.mcmeta'), ($metadata | ConvertTo-Json -Depth 5), $utf8)
 [IO.File]::WriteAllText((Join-Path $assetRoot 'sounds.json'), (ConvertTo-Json -InputObject $sounds -Depth 8), $utf8)
 [IO.File]::WriteAllLines((Join-Path $OutputDirectory 'world_music-client.toml'), $config, $utf8)
 [IO.File]::WriteAllLines((Join-Path $OutputDirectory 'track-mapping.txt'), $mapping, $utf8)
-$zip = Join-Path $OutputDirectory 'WorldMusicPack-26.3.zip'
+$zip = Join-Path $OutputDirectory 'WorldMusicPack.zip'
 Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -Force
 Write-Host "Created $zip with $total tracks."
 Write-Host 'Put the ZIP in your game resourcepacks folder and enable it in game.'

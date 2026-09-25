@@ -8,10 +8,11 @@ Minecraft NeoForge 客户端世界音乐模组：早晨、中午、晚上和午�
 
 | Minecraft | NeoForge 最低版本 | 源码目录 | 资源包格式 |
 | --- | --- | --- | --- |
-| 26.1.2 | 26.1.2.94 | 仓库根目录 | 84.0 |
-| 26.3 | 26.3.0.3-beta | [ports/26.3](ports/26.3) | 97.1 |
+| 26.1.2 | 26.1.2.94 | 仓库根目录 | 84–2147483647 |
+| 26.2 | 26.2.0.67 | [port/26.2](port/26.2) | 84–2147483647 |
+| 26.3 | 26.3.0.3-beta | [ports/26.3](ports/26.3) | 84–2147483647 |
 
-模组版本为 **1.0.1**。两个工程独立构建，安装包不可跨 Minecraft 版本使用。最低版本已实际测试，后续 NeoForge 构建未逐个验证。
+模组版本为 **1.0.1**。三个工程独立构建，安装包不可跨 Minecraft 版本使用。最低版本已实际测试，后续 NeoForge 构建未逐个验证。
 
 ## 功能
 
@@ -39,13 +40,16 @@ Minecraft NeoForge 客户端世界音乐模组：早晨、中午、晚上和午�
 # Minecraft 26.1.2
 gradle build
 
+# Minecraft 26.2
+gradle -p port/26.2 build
+
 # Minecraft 26.3
 gradle -p ports/26.3 build
 ```
 
 也可在相应工程目录运行 `powershell -ExecutionPolicy Bypass -File ./build-local.ps1`。
 
-输出位于各工程的 `build/libs/`：`world_music-26.1.2-1.0.1.jar` 或 `world_music-26.3-1.0.1.jar` 为安装包，带 `-sources` 的 JAR 为源码包。
+输出位于各工程的 `build/libs/`：`world_music-26.1.2-1.0.1.jar`、`world_music-26.2-1.0.1.jar` 或 `world_music-26.3-1.0.1.jar` 为安装包，带 `-sources` 的 JAR 为源码包。
 
 ## 安装和配置
 
@@ -84,7 +88,7 @@ powershell -ExecutionPolicy Bypass -File ./tools/Build-MusicPack.ps1
 
 输出位于 `output/`：
 
-- `WorldMusicPack.zip`（26.1.2）或 `WorldMusicPack-26.3.zip`（26.3）：放入游戏 `resourcepacks` 并启用，无需解压。
+- `WorldMusicPack.zip`（通用版，声明兼容 Minecraft 26.1.2 及以上）：放入游戏 `resourcepacks` 并启用，无需解压。
 - `world_music-client.toml`：关闭游戏后复制到 `config`。替换前备份已有配置。
 - `track-mapping.txt`：原文件名与声音事件 ID 对照表。
 
@@ -98,6 +102,8 @@ powershell -ExecutionPolicy Bypass -File ./tools/Build-MusicPack.ps1
 - `gradle runClientGameplay`：自动新建独立测试世界，验证切歌、自然结束后静音、下一时段恢复。
 
 26.3 使用相同任务，加上 `-p ports/26.3` 或在其目录执行。测试模组不会进入发布 JAR。记录见 [26.1.2 验证](VALIDATION.md) 和 [26.3 验证](ports/26.3/VALIDATION.md)。其他接管音乐的模组需在目标整合包额外验证。
+
+26.2 工程使用 `-p port/26.2`，验证记录见 [26.2 验证](port/26.2/VALIDATION.md)。所有工程的打包工具统一声明最低资源格式 84、最高 2147483647；该声明不保证未来格式变更后仍兼容，也不改变模组 JAR 的版本要求。
 
 ## 许可证
 

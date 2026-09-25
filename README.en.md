@@ -8,10 +8,11 @@ A client-side world music mod for Minecraft NeoForge, with separate playlists fo
 
 | Minecraft | Minimum NeoForge Version | Source Directory | Resource Pack Format |
 | --- | --- | --- | --- |
-| 26.1.2 | 26.1.2.94 | Repository root | 84.0 |
-| 26.3 | 26.3.0.3-beta | [ports/26.3](ports/26.3) | 97.1 |
+| 26.1.2 | 26.1.2.94 | Repository root | 84–2147483647 |
+| 26.2 | 26.2.0.67 | [port/26.2](port/26.2) | 84–2147483647 |
+| 26.3 | 26.3.0.3-beta | [ports/26.3](ports/26.3) | 84–2147483647 |
 
-The current mod version is **1.0.1**. The two projects build independently, and their mod JARs are not interchangeable between Minecraft versions. The minimum NeoForge versions have been tested; later builds have not been individually verified.
+The current mod version is **1.0.1**. The three projects build independently, and their mod JARs are not interchangeable between Minecraft versions. The minimum NeoForge versions have been tested; later builds have not been individually verified.
 
 ## Features
 
@@ -39,13 +40,16 @@ Requires **Java 25 JDK** and a global installation of **Gradle 9.6.1**. Set `JAV
 # Minecraft 26.1.2
 gradle build
 
+# Minecraft 26.2
+gradle -p port/26.2 build
+
 # Minecraft 26.3
 gradle -p ports/26.3 build
 ```
 
 Alternatively, run `powershell -ExecutionPolicy Bypass -File ./build-local.ps1` from the appropriate project directory.
 
-Build outputs are placed in each project's `build/libs/` directory. Install `world_music-26.1.2-1.0.1.jar` or `world_music-26.3-1.0.1.jar`; JARs with the `-sources` suffix contain source code.
+Build outputs are placed in each project's `build/libs/` directory. Install `world_music-26.1.2-1.0.1.jar`, `world_music-26.2-1.0.1.jar`, or `world_music-26.3-1.0.1.jar`; JARs with the `-sources` suffix contain source code.
 
 ## Installation and Configuration
 
@@ -84,7 +88,7 @@ powershell -ExecutionPolicy Bypass -File ./tools/Build-MusicPack.ps1
 
 The following files are generated in `output/`:
 
-- `WorldMusicPack.zip` (26.1.2) or `WorldMusicPack-26.3.zip` (26.3): place it in the game's `resourcepacks` folder and enable it. No extraction is needed.
+- `WorldMusicPack.zip` (universal; declares compatibility with Minecraft 26.1.2 and later): place it in the game's `resourcepacks` folder and enable it. No extraction is needed.
 - `world_music-client.toml`: close the game, then copy this file into `config`. Back up your existing configuration before replacing it.
 - `track-mapping.txt`: maps original filenames to sound event IDs.
 
@@ -98,6 +102,8 @@ Filenames containing Chinese characters and spaces are supported. Tracks are sor
 - `gradle runClientGameplay`: automatically create a separate test world to verify track switching, silence after a track ends naturally, and playback resuming in the next period.
 
 The 26.3 project uses the same tasks. Add `-p ports/26.3` or run them from that directory. The test mod is excluded from release JARs. See the [26.1.2 validation record](VALIDATION.md) and [26.3 validation record](ports/26.3/VALIDATION.md). Compatibility with other mods that control music requires additional testing in your target modpack.
+
+Use `-p port/26.2` for the 26.2 project; see [26.2 validation](port/26.2/VALIDATION.md). All pack builders declare resource formats 84 through 2147483647. This does not guarantee compatibility with future format changes or change each mod JAR's Minecraft version requirement.
 
 ## License
 

@@ -7,7 +7,7 @@
 - 安装包：`build/libs/world_music-26.3-1.0.1.jar`
 - 源码包：`build/libs/world_music-26.3-1.0.1-sources.jar`
 - 音乐打包：`powershell -ExecutionPolicy Bypass -File ./tools/Build-MusicPack.ps1`
-- 资源包：`output/WorldMusicPack-26.3.zip`，格式 97.1。
+- 资源包：`output/WorldMusicPack.zip`，通用格式范围 84–2147483647，声明兼容 Minecraft 26.1.2 及以上。
 - 默认配置：`config/world_music-client.toml`，与 26.1.2 版使用相同曲目 ID。
 
 实际运行验证见 [VALIDATION.md](VALIDATION.md)。音乐不随源码分发，需自行放入本目录下的四个 `music` 子目录。
